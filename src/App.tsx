@@ -1,26 +1,28 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import reset from 'styled-reset';
+import { ThemeProvider, createGlobalStyle } from 'styled-components';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+import Navigation from './router/Navigation';
+import { theme } from './theme/theme';
+
+const GlobalStyle = createGlobalStyle`
+    ${ reset }
+
+    body {
+        font-family: 'Lato', sans-serif;
+    }
+
+    .hide-scrollbar::-webkit-scrollbar {
+        display: none;
+    }
+`;
+
+const App = () => {
+    return (
+        <ThemeProvider theme={ theme } >
+            <GlobalStyle />
+            <Navigation />
+        </ThemeProvider>
+    );
+};
 
 export default App;
