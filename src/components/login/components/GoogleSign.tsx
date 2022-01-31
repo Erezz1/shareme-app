@@ -19,16 +19,12 @@ const ButtonLogin = styled.button`
     transition: all 300ms ease-in-out;
 `;
 
-const Icon = styled( FcGoogle )`
-    padding-right: 1rem;
-    font-size: 1.2rem;
-`;
-
 const GoogleSign = () => {
 
     const navigate = useNavigate();
 
-    const responseGoogle = async ( res: any ) => {
+    // Hace el login con google
+    const responseGoogle = ( res: any ) => {
         localStorage.setItem( 'user', JSON.stringify( res.profileObj ) );
         const { name, googleId, imageUrl } = res.profileObj;
 
@@ -39,8 +35,10 @@ const GoogleSign = () => {
             image: imageUrl,
         }
 
+        // Crea el usuario en la base de datos si no existe
         client.createIfNotExists( doc )
             .then( () => {
+                // Redirige al usuario a la página principal
                 navigate('/', { replace: true });
             })
     }
@@ -54,7 +52,11 @@ const GoogleSign = () => {
                     onClick={ renderProps.onClick }
                     disabled={ renderProps.disabled }
                 >
-                    <Icon /> Inicia sesión con Google
+                    <FcGoogle
+                        fontSize={21}
+                        style={{ marginRight: '0.25rem' }}
+                    />
+                    Inicia sesión con Google
                 </ButtonLogin>
             )}
             onSuccess={ responseGoogle }

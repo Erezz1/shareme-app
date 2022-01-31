@@ -5,7 +5,7 @@ import {
 } from 'react-router-dom';
 
 import Home from '../container/Home';
-import Login from '../components/login';
+import { Login } from '../components';
 
 const Navigation = () => {
     return (

@@ -11,25 +11,16 @@ interface IBackgroundColor {
     mainColor: string;
     secondaryColor: string;
     blackOverlay: string;
+    gray: string;
 }
 
 interface IKeyframe {
     spin: Keyframes;
     pulse: Keyframes;
-    'slide-in': Keyframes;
-    'slide-fwd': Keyframes;
 }
 
 declare module 'styled-components' {
     export interface DefaultTheme {
-        // Size
-        margin: object;
-        width: object;
-        height: object;
-        flex: object;
-        maxHeight: object;
-        minWidth: object;
-
         // Colors
         textColor: ITextColor;
         backgroundColor: IBackgroundColor;

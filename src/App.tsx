@@ -7,6 +7,14 @@ import { theme } from './theme/theme';
 const GlobalStyle = createGlobalStyle`
     ${ reset }
 
+    html {
+        box-sizing: border-box;
+    }
+
+    *, *:before, *:after {
+        box-sizing: inherit;
+    }
+
     body {
         font-family: 'Lato', sans-serif;
     }
