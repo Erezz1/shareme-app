@@ -25,22 +25,26 @@ const GoogleSign = () => {
 
     // Hace el login con google
     const responseGoogle = ( res: any ) => {
-        localStorage.setItem( 'user', JSON.stringify( res.profileObj ) );
-        const { name, imageUrl } = res.profileObj;
+        console.log( res );
+        if ( res.profileObj !== undefined && res.profileObj !== null ) {
+            localStorage.setItem( 'userGoogle', JSON.stringify( res.profileObj ) );
+            const { name, imageUrl } = res.profileObj;
 
-        const doc = {
-            _id: res?.profileObj?.googleId,
-            _type: 'user',
-            userName: name,
-            image: imageUrl,
+            const doc = {
+                _id: res?.profileObj?.googleId,
+                _type: 'user',
+                userName: name,
+                image: imageUrl,
+            }
+
+            // Crea el usuario en la base de datos si no existe
+            client.createIfNotExists( doc )
+                .then( () => {
+                    // Redirige al usuario a la página principal
+                    navigate('/', { replace: true });
+                })
+                .catch( err => console.log( err ) );
         }
-
-        // Crea el usuario en la base de datos si no existe
-        client.createIfNotExists( doc )
-            .then( () => {
-                // Redirige al usuario a la página principal
-                navigate('/', { replace: true });
-            })
     }
 
     return (
