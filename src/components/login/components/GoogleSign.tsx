@@ -26,10 +26,10 @@ const GoogleSign = () => {
     // Hace el login con google
     const responseGoogle = ( res: any ) => {
         localStorage.setItem( 'user', JSON.stringify( res.profileObj ) );
-        const { name, googleId, imageUrl } = res.profileObj;
+        const { name, imageUrl } = res.profileObj;
 
         const doc = {
-            _id: googleId,
+            _id: res?.profileObj?.googleId,
             _type: 'user',
             userName: name,
             image: imageUrl,

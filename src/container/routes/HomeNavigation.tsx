@@ -1,9 +1,19 @@
-import { Route, Routes } from 'react-router-dom';
+import { useEffect } from 'react';
+import { Route, Routes, useNavigate } from 'react-router-dom';
 
-import { UserProfile } from '../../components';
 import Pins from '../Pins';
+import { UserProfile } from '../../components';
+import { fetchUser } from '../../utils/fetchUser';
 
 const HomeNavigation = ({ user }: { user: any }) => {
+
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        const user = fetchUser();
+        if (!user) navigate('/login');
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     return (
         <Routes>

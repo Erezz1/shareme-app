@@ -67,7 +67,7 @@ const SuperiorButtons = ({ user, image, id, save  }: Props ) => {
 
     // Verifica si el usuario ha guardado el pin
     const alreadySavedArr = save?.filter(( item: any ) => (
-        item.postedBy._id === user.googleId
+        item.postedBy._id === user?.googleId
     ));
     const alreadySaved = !!alreadySavedArr?.length;
 
@@ -81,10 +81,10 @@ const SuperiorButtons = ({ user, image, id, save  }: Props ) => {
                 .setIfMissing({ save: [] })
                 .insert('after', 'save[-1]', [{
                     _key: uuid(),
-                    userId: user.googleId,
+                    userId: user?.googleId,
                     postedBy: {
                         _type: 'postedBy',
-                        _ref: user.googleId,
+                        _ref: user?.googleId,
                     }
                 }])
                 .commit()

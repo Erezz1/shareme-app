@@ -1,7 +1,8 @@
-import { Dispatch, SetStateAction } from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Dispatch, SetStateAction, useEffect } from 'react';
+import { Routes, Route, useNavigate } from 'react-router-dom';
 
 import { PinDetail, Feed, CreatePin, Search } from '../../components';
+import { fetchUser } from '../../utils/fetchUser';
 
 interface Props {
     user: any;
@@ -10,6 +11,14 @@ interface Props {
 }
 
 const PinNavigation = ({ user, searchTerm, setSearchTerm }: Props ) => {
+
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        const user = fetchUser();
+        if (!user) navigate('/login');
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     return (
         <Routes>

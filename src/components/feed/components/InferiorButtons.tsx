@@ -90,7 +90,7 @@ const InferiorButtons = ({ destination, postedBy, user, id }: Props ) => {
 
             {
                 // Si el usuario es el mismo que el que publico el pin, se muestra el boton de eliminar
-                postedBy?._id === user.googleId
+                postedBy?._id === user?.googleId
                 && (
                     <ButtonDelete
                         type="button"
